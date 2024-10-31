@@ -2,6 +2,8 @@ package com.example.Entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -15,12 +17,15 @@ public class Servico {
     private String descricao;
 
     @Column(nullable = false)
-    private int duracao; //coloquei int para melhor manipulação, mas o certo é a classa Duration
+    private int duracao; //coloquei int para melhor manipulação, mas o certo é a class Duration
 
     @Column(nullable = false)
     private double preco;
 
     public Servico(){}
+
+    @ManyToMany(mappedBy = "servico")
+    private List<Prestador> prestador = new ArrayList<>();
 
     public long getId() {
         return id;
@@ -52,6 +57,14 @@ public class Servico {
 
     public void setPreco(double preco) {
         this.preco = preco;
+    }
+
+    public List<Prestador> getPrestador() {
+        return prestador;
+    }
+
+    public void setPrestador(List<Prestador> prestador) {
+        this.prestador = prestador;
     }
 
     @Override

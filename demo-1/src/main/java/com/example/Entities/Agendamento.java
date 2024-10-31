@@ -17,6 +17,18 @@ public class Agendamento {
 
 	public Agendamento(){}
 
+	@ManyToOne
+	@JoinColumn(name = "cliente_id")
+	private Cliente cliente;
+
+	@ManyToOne
+	@JoinColumn(name = "prestador_id")
+	private Prestador prestador;
+
+	@ManyToOne
+	@JoinColumn(name = "servico_id")
+	private Servico servico;
+
 	public Long getId() {
 		return id;
 	}
@@ -33,6 +45,29 @@ public class Agendamento {
 		this.dataHora = dataHora;
 	}
 
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public Prestador getPrestador() {
+		return prestador;
+	}
+
+	public void setPrestador(Prestador prestador) {
+		this.prestador = prestador;
+	}
+
+	public Servico getServico() {
+		return servico;
+	}
+
+	public void setServico(Servico servico) {
+		this.servico = servico;
+	}
 
 	@Override
 	public boolean equals(Object o) {

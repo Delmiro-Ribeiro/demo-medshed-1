@@ -2,6 +2,8 @@ package com.example.Entities;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -27,6 +29,37 @@ public class Prestador {
 	private String especialidade;
 
 	public Prestador(){}
+
+	@OneToMany(mappedBy = "prestador", cascade = CascadeType.ALL)
+	private List<Agendamento> agendamento = new ArrayList<>();
+//-------------------------------------------------------------------------
+	public List<Agendamento> getAgendamento() {
+		return agendamento;
+	}
+
+	public void setAgendamentos(List<Agendamento> agendamento) {
+		this.agendamento = agendamento;
+	}
+
+
+	@ManyToMany
+	@JoinTable(
+			name = "prestador_servico",
+			joinColumns = @JoinColumn(name = "prestador_id"),
+			inverseJoinColumns = @JoinColumn(name = "servico_id")
+	)
+	private List<Servico> servico = new ArrayList<>();
+
+	public List<Servico> getServico() {
+		return servico;
+	}
+
+	public void setServico(List<Servico> servico) {
+		this.servico = servico;
+	}
+
+//----------------------------------------------------------------------
+
 
 	public Long getId() {
 		return id;
